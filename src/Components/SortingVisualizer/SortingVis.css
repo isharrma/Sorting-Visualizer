@@ -1,0 +1,14 @@
+.array-container{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.array-bar{
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(#a1c4fd , #c2e9fb);
+    display: inline;
+    margin: 0 5px;
+
+}
