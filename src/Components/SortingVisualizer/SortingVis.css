@@ -1,3 +1,7 @@
+*{
+    background:	#202020;
+}
+
 .array-container{
     /* display: flex;
     justify-content: center;
@@ -9,8 +13,7 @@
 }
 
 .array-bar{
-    width: 2px;
-    background: linear-gradient(90deg,#a1c4fd , #c2e9fb);
+    width: 5px;
     display: inline-block;
     margin: 0 1px;
 
