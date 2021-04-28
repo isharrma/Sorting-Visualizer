@@ -45,7 +45,7 @@ const SortingVis = () => {
           const [barOneIdx, newHeight] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
           barOneStyle.height = `${newHeight}px`;
-        }, i * 5);
+        }, i * 0.1);
       }
     }
   }
@@ -54,8 +54,7 @@ const SortingVis = () => {
    // ----------Handles Bubble Sort animations-------------------------------------
 
    const bubbleSort = () => {
-    const animations = BubbleSort(array);
-    console.log(animations);
+    const animations = BubbleSort(array);   
     for (let i = 0; i < animations.length; i++) {
       const arrayBars = document.getElementsByClassName('array-bar');
       const isColorChange = animations[i][2];
@@ -73,9 +72,10 @@ const SortingVis = () => {
           const [barOneIdx, newHeight] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
           barOneStyle.height = `${newHeight}px`;
-        }, i * AnimationSpeed);
+        }, i * 2);
       }
     }
+    
   }
 
 
@@ -84,8 +84,28 @@ const SortingVis = () => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
+const disableButtons = () =>{
+  const buttons = document.getElementsByClassName('buttons');
+    for(let i=0;i<buttons.length;i++)
+      buttons[i].disabled  = "true";
+}
 
+const enableButtons = () =>{
+  const buttons = document.getElementsByClassName('buttons');
+    for(let i=0;i<buttons.length;i++)
+      buttons[i].disabled  = "false";
+}
 
+// ----------Checks if arrays are equal or not-------------------------------------
+function arraysAreEqual(arrayOne, arrayTwo) {
+  if (arrayOne.length !== arrayTwo.length) return false;
+  for (let i = 0; i < arrayOne.length; i++) {
+    if (arrayOne[i] !== arrayTwo[i]) {
+      return false;
+    }
+  }
+  return true;
+}
 
   useEffect(() => {
     resetArray();
@@ -104,9 +124,9 @@ const SortingVis = () => {
       ))}
 
       <div className="footer">
-        <button onClick={() => resetArray()}>Generate New Array</button>
-        <button onClick={ () => mergeSort() } >Merge Sort</button>
-        <button onClick={ () => bubbleSort() }>Bubble Sort</button>
+        <button className="buttons" onClick={() => resetArray()}>Generate New Array</button>
+        <button className="buttons" onClick={ () => mergeSort() } >Merge Sort</button>
+        <button className="buttons" onClick={ () => bubbleSort() }>Bubble Sort</button>
         {/* <button>Insertion Sort</button>
         <button>Quick Sort</button>
         <button onClick={()=>( testSortingAlgorithms() )} >Test Algo</button> */}

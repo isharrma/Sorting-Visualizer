@@ -19,7 +19,7 @@
 
 }
 
-.footer > button{
+.buttons{
     border: none;
     border-radius: 12px;
     background: #F5B725;
@@ -27,7 +27,7 @@
     display: inline-block;
 }
 
-.footer > button:hover{
+.buttons:hover{
     background-color: #FFD439;
     font-size: medium;
 }
