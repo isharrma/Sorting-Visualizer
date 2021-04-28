@@ -6,8 +6,8 @@ import "./SortingVis.css";
 
 
 const ArrayBarNo = 140;
-const PrimaryColor = "#8A2BE2";
-const SecondaryColor = "#20B2AA";
+const PrimaryColor = " #BA36A4 ";
+const SecondaryColor = "#E27963";
 const AnimationSpeed = 10;
 
 
@@ -18,7 +18,7 @@ const SortingVis = () => {
    const resetArray = () => {
     const arr = [];
     for (let i = 0; i < ArrayBarNo; i++) {
-      arr.push(randomIntFromIntervals(5, 700));
+      arr.push(randomIntFromIntervals(5, 550));
     }
     setArray(arr);
   };

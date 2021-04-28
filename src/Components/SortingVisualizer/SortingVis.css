@@ -1,5 +1,5 @@
 *{
-    background:	#202020;
+    background:		#303030;
 }
 
 .array-container{
@@ -21,7 +21,13 @@
 
 .footer > button{
     border: none;
-    background-color: #ffa700;
+    border-radius: 12px;
+    background: #F5B725;
     margin: 2px;
     display: inline-block;
+}
+
+.footer > button:hover{
+    background-color: #FFD439;
+    font-size: medium;
 }
