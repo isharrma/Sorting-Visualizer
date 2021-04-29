@@ -9,12 +9,11 @@ import "./SortingVis.css";
 const ArrayBarNo = 140;
 const PrimaryColor = " #BA36A4 ";
 const SecondaryColor = "#E27963";
-const AnimationSpeed = 10;
+const AnimationSpeed = 5;
 
 
 const SortingVis = () => {
   const [array, setArray] = useState([]);
-
    // Handles Generate Array functionality
    const resetArray = () => {
     const arr = [];
@@ -26,56 +25,63 @@ const SortingVis = () => {
 
   // ----------Handles Merge Sort animations-------------------------------------
  const mergeSort = () => {
-    const animations = MergeSort(array);
-    for (let i = 0; i < animations.length; i++) {
-      const arrayBars = document.getElementsByClassName('array-bar');
-      const isColorChange = i % 3 !== 2;
-      if (isColorChange === true) {
-        const [barOneIdx, barTwoIdx] = animations[i];
+   disableButtons();
+  const animations = MergeSort(array);
+  for (let i = 0; i < animations.length; i++) {
+    const arrayBars = document.getElementsByClassName('array-bar');
+    const isColorChange = i % 3 !== 2;
+    if (isColorChange) {
+      const [barOneIdx, barTwoIdx] = animations[i];
+      const barOneStyle = arrayBars[barOneIdx].style;
+      const barTwoStyle = arrayBars[barTwoIdx].style;
+      const color = i % 3 === 0 ? SecondaryColor : PrimaryColor;
+      setTimeout(() => {
+        barOneStyle.backgroundColor = color;
+        barTwoStyle.backgroundColor = color;
+      }, i * AnimationSpeed);
+    } else {
+      setTimeout(() => {
+        const [barOneIdx, newHeight] = animations[i];
         const barOneStyle = arrayBars[barOneIdx].style;
-        console.log(barOneStyle.backgroundColor);
-        const barTwoStyle = arrayBars[barTwoIdx].style;
-        const color = i % 3 === 0 ? SecondaryColor: PrimaryColor;
-        setTimeout(() => {
-          barOneStyle.backgroundColor = color;
-          barTwoStyle.backgroundColor = color;
-        }, i * AnimationSpeed);
-      } else {
-        setTimeout(() => {
-          const [barOneIdx, newHeight] = animations[i];
-          const barOneStyle = arrayBars[barOneIdx].style;
-          barOneStyle.height = `${newHeight}px`;
-        }, i * 0.1);
-      }
+        barOneStyle.height = `${newHeight}px`;
+      }, i * AnimationSpeed);
     }
   }
+  setTimeout(() => {
+    enableButtons();
+  }, animations.length * AnimationSpeed);
+}
+
 
 
    // ----------Handles Bubble Sort animations-------------------------------------
 
    const bubbleSort = () => {
+     disableButtons()
     const animations = BubbleSort(array);   
-    for (let i = 0; i < animations.length; i++) {
+    for (let i = 0; i < animations.length; i++) {     
       const arrayBars = document.getElementsByClassName('array-bar');
-      const isColorChange = animations[i][2];
-      if (isColorChange === true) {
+      const isColorChange = animations[i][2]; 
+      if (isColorChange) {
         const [barOneIdx, barTwoIdx] = animations[i];
         const barOneStyle = arrayBars[barOneIdx].style;
         const barTwoStyle = arrayBars[barTwoIdx].style;
         const color = i % 2 === 0 ? SecondaryColor: PrimaryColor;
-        setTimeout(() => {
-          barOneStyle.backgroundColor = color;
-          barTwoStyle.backgroundColor = color;
-        }, i * AnimationSpeed);
-      } else {
-        setTimeout(() => {
-          const [barOneIdx, newHeight] = animations[i];
-          const barOneStyle = arrayBars[barOneIdx].style;
-          barOneStyle.height = `${newHeight}px`;
-        }, i * 2);
+    setTimeout(() => {
+      barOneStyle.backgroundColor = color;
+      barTwoStyle.backgroundColor = color;
+    }, i * <AnimationSpeed></AnimationSpeed>);
+  } else {
+    setTimeout(() => {
+      const [barOneIdx, newHeight] = animations[i];
+      const barOneStyle = arrayBars[barOneIdx].style;
+      barOneStyle.height = `${newHeight}px`;
+    }, i * AnimationSpeed);
       }
     }
-    
+    setTimeout(() => {
+      enableButtons();
+    }, animations.length * AnimationSpeed); 
   }
 
 
@@ -84,27 +90,25 @@ const SortingVis = () => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-const disableButtons = () =>{
-  const buttons = document.getElementsByClassName('buttons');
-    for(let i=0;i<buttons.length;i++)
-      buttons[i].disabled  = "true";
-}
-
-const enableButtons = () =>{
-  const buttons = document.getElementsByClassName('buttons');
-    for(let i=0;i<buttons.length;i++)
-      buttons[i].disabled  = "false";
-}
 
 // ----------Checks if arrays are equal or not-------------------------------------
-function arraysAreEqual(arrayOne, arrayTwo) {
-  if (arrayOne.length !== arrayTwo.length) return false;
-  for (let i = 0; i < arrayOne.length; i++) {
-    if (arrayOne[i] !== arrayTwo[i]) {
-      return false;
-    }
-  }
-  return true;
+const disableButtons =() => {
+  const buttons = document.getElementsByClassName("buttons");
+   for(let i=0;i<buttons.length;i++)
+    buttons[i].disabled =true;
+}
+
+const enableButtons = () => {
+  const buttons = document.getElementsByClassName("buttons");
+   for(let i=0;i<buttons.length;i++)
+    buttons[i].disabled =false;
+}
+
+const fact = (a) => {
+  if(a === 0)
+    return 1;
+  else
+    return a*fact(a-1);
 }
 
   useEffect(() => {
@@ -123,17 +127,17 @@ function arraysAreEqual(arrayOne, arrayTwo) {
             }}></div>
       ))}
 
-      <div className="footer">
-        <button className="buttons" onClick={() => resetArray()}>Generate New Array</button>
-        <button className="buttons" onClick={ () => mergeSort() } >Merge Sort</button>
-        <button className="buttons" onClick={ () => bubbleSort() }>Bubble Sort</button>
-        {/* <button>Insertion Sort</button>
-        <button>Quick Sort</button>
-        <button onClick={()=>( testSortingAlgorithms() )} >Test Algo</button> */}
-        {/* onClick={()=>()} */}
+     
+          <div className="footer">
+        <button className="buttons"  onClick={() => resetArray()}>Generate New Array</button>
+        <button className="buttons"  onClick={ () => mergeSort() } >Merge Sort</button>
+        <button className="buttons"   onClick={ () => bubbleSort() }>Bubble Sort</button>
       </div>
+
     </div>
   );
 };
 
 export default SortingVis;
+
+
